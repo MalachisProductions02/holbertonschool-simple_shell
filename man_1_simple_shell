@@ -1,0 +1,51 @@
+.TH simple_shell 1 "April 2025" "simple_shell manual"
+.SH NAME
+simple_shell \- simple UNIX command interpreter
+
+.SH SYNOPSIS
+.B ./hsh
+[\fifile\fR]
+
+
+.SH DESCRIPTION
+The \fBsimple_shell\fR program is a minimalist implementation of a command-line interpreter, similar to the traditional Bourne shell (\fBsh\fR).
+
+
+It reads commands from the standard input or from a script file, executes them, and displays the output to the standard output.
+
+
+.SH FEATURES
+- Interactive mode: displays a prompt and waits for user commands.
+- Non-interactive mode: reads commands from a file or piped input.
+- Supports built-in commands: \fBexit\fR and \fBenv\fR.
+- Executes external programs located using the system's \fBPATH\fR enviroment variable.
+- Graceful handling of invalid commands and errors.
+
+
+.SH USAGES
+To compile the shell:
+
+.B gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+
+To start the shell:
+
+.B ./hsh
+
+Once the shell is running, type any command and press Enter:
+
+.EXAMPLE
+$ ./hsh
+$ ls -l
+total 0
+-rw-r--r-- 1 user user 0 Apr 14 19:25 file1
+-rw-r--r-- 1 user user 0 Apr 14 19:25 file2
+
+In non-interactive mode:
+
+$ echo "ls -l" | ./hsh
+
+.SH AUTHOR
+Written by Daniel Farf√n and Luis May.
+
+.SH SEE ALSO
+sh(1), bash(1)
