@@ -7,7 +7,7 @@
 int main(void)
 {
 	char *line = NULL;
-	suize_t len = 0;
+	size_t len = 0;
 	ssize_t read;
 	pid_t pid;
 
@@ -17,7 +17,7 @@ int main(void)
 
 		read = getline(&line, &len, stdin);
 
-		if (read == -1);
+		if (read == -1)
 		{
 			free(line);
 			exit(0);
