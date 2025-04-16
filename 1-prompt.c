@@ -1,4 +1,5 @@
 #include "main.h"
+#include <string.h>
 
 /**
  * main - Simple shell
@@ -7,8 +8,11 @@
 int main(void)
 {
 	char *line = NULL;
+	char *args[100];
+	char *token = strtok(line, " ");
 	size_t len = 0;
 	ssize_t read;
+	int i = 0;
 	pid_t pid;
 
 	while (1)
@@ -24,13 +28,9 @@ int main(void)
 		}
 
 		if (line[read - 1] == '\n')
-			line[read - 1] = '\0';
+			line[read - 1] == '\0';
 
-		char *args[100];
-		char *token = strtok(line, " ");
-		int 1 = 0;
-
-		while (token != NULL && 1 < 99)
+		while (token != NULL && i < 99)
 		{
 			args[i++] = token;
 			token = strtok(NULL, " ");
