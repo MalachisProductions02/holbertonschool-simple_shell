@@ -60,5 +60,5 @@ int main(void)
     }
 
     free(line);
-    return (0); /* Times that I corrected the code: 3 */
+    return (0); /* Times that I corrected the code: 12 */
 }
