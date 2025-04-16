@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
-// Times that I solve the issues: 1
+
 extern char **environ;
 
 /**
@@ -19,6 +19,7 @@ int main(void)
     size_t len = 0;
     ssize_t read;
     pid_t pid;
+    int i;
 
     while (1)
     {
@@ -35,16 +36,15 @@ int main(void)
         if (line[read - 1] == '\n')
             line[read - 1] = '\0';
 
-        // Reinicializar i y token en cada iteración
-        int i = 0; // Reinicializar i
-        char *token = strtok(line, " "); 
+        i = 0; // Reinicializar i
+        char *token = strtok(line, " ");
 
         while (token != NULL && i < 99)
         {
             args[i++] = token;
             token = strtok(NULL, " ");
         }
-        args[i] = NULL; // Terminar el arreglo con NULL
+        args[i] = NULL;
 
         pid = fork();
         if (pid == 0)
@@ -60,5 +60,5 @@ int main(void)
     }
 
     free(line);
-    return (0);
+    return (0); // Times that I corrected the code: 2
 }
