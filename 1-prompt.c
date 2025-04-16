@@ -6,8 +6,6 @@
 #include <sys/wait.h>
 #include <string.h>
 
-extern char **environ;
-
 /**
  * main - Simple shell
  * Return: 0 on success, 1 on error
