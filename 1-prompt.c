@@ -55,11 +55,15 @@ int main(void)
             exit(1);
         }
         else if (pid > 0)
+        {
             wait(NULL);
+        }
         else
+        {
             perror("Error:");
+        }
     }
 
     free(line);
-    return (0); /* Times that I corrected this code: 16 */
+    return (0);/* Times that I corrected the code: 17 */
 }
