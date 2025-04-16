@@ -16,11 +16,11 @@ int main(void)
 {
     char *line = NULL;
     char *args[100];
-     char *token = strtok(line, " ");
     size_t len = 0;
     ssize_t read;
     pid_t pid;
     int i;
+    char *token;
 
     while (1)
     {
@@ -37,7 +37,10 @@ int main(void)
         if (line[read - 1] == '\n')
             line[read - 1] = '\0';
 
-        i = 0;
+        // Reinicializar i en cada iteración
+        i = 0; // Reinicializar i
+        token = strtok(line, " ");
+
         while (token != NULL && i < 99)
         {
             args[i++] = token;
@@ -59,5 +62,5 @@ int main(void)
     }
 
     free(line);
-    return (0); /* Times that I corrected the code: 13 */
+    return (0); /* Times that I corrected this code: 14 */
 }
