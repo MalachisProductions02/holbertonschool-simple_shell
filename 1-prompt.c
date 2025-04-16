@@ -5,6 +5,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
+// Plis help me, idk what I'm doing right now U_U
+// Every change I do, it's a new issue and I don't get it the reason for it
 
 /**
  * main - Simple shell
@@ -14,11 +16,10 @@ int main(void)
 {
     char *line = NULL;
     char *args[100];
-    char *token = strtok(line, " ");
     size_t len = 0;
     ssize_t read;
     pid_t pid;
-     int i = 0;
+    int i; // Declarado al principio
 
     while (1)
     {
@@ -35,6 +36,9 @@ int main(void)
         if (line[read - 1] == '\n')
             line[read - 1] = '\0';
         
+        i = 0;
+        char *token = strtok(line, " ");
+
         while (token != NULL && i < 99)
         {
             args[i++] = token;
