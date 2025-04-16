@@ -5,8 +5,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
-// Plis help me, idk what I'm doing right now U_U
-// Every change I do, it's a new issue and I don't get it the reason for it
+// Times that I solve the issues: 1
+extern char **environ;
 
 /**
  * main - Simple shell
@@ -19,7 +19,6 @@ int main(void)
     size_t len = 0;
     ssize_t read;
     pid_t pid;
-    int i; // Declarado al principio
 
     while (1)
     {
@@ -35,16 +34,17 @@ int main(void)
 
         if (line[read - 1] == '\n')
             line[read - 1] = '\0';
-        
-        i = 0;
-        char *token = strtok(line, " ");
+
+        // Reinicializar i y token en cada iteración
+        int i = 0; // Reinicializar i
+        char *token = strtok(line, " "); 
 
         while (token != NULL && i < 99)
         {
             args[i++] = token;
             token = strtok(NULL, " ");
         }
-        args[i] = NULL;
+        args[i] = NULL; // Terminar el arreglo con NULL
 
         pid = fork();
         if (pid == 0)
