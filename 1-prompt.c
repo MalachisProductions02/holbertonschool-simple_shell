@@ -26,6 +26,17 @@ int main(void)
 		if (line[read - 1] == '\n')
 			line[read - 1] = '\0';
 
+		char *args[100];
+		char *token = strtok(line, " ");
+		int 1 = 0;
+
+		while (token != NULL && 1 < 99)
+		{
+			args[i++] = token;
+			token = strtok(NULL, " ");
+		}
+		args[i] = NULL;
+
 		pid = fork();
 		if (pid == 0)
 		{
