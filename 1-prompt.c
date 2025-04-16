@@ -10,7 +10,7 @@ extern char **environ;
 
 /**
  * main - Simple shell
- * Return: 0 on success, 1 on error
+ * Return: Always 0.
  */
 int main(void)
 {
@@ -24,13 +24,15 @@ int main(void)
 
     while (1)
     {
-        write(1, "#cisfun$ ", 9);
+        if (isatty(STDIN_FILENO))
+            write(1, "#cisfun$ ", 9);
 
         read = getline(&line, &len, stdin);
-
         if (read == -1)
         {
             free(line);
+            if (isatty(STDIN_FILENO))
+                write(1, "\n", 1);
             exit(0);
         }
 
@@ -39,7 +41,6 @@ int main(void)
 
         i = 0;
         token = strtok(line, " ");
-
         while (token != NULL && i < 99)
         {
             args[i++] = token;
@@ -65,5 +66,5 @@ int main(void)
     }
 
     free(line);
-    return (0);/* Times that I corrected the code: 17 */
+    return (0); /* Times that I corrected the code: 18 */
 }
