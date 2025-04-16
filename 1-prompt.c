@@ -37,7 +37,7 @@ int main(void)
         if (line[read - 1] == '\n')
             line[read - 1] = '\0';
 
-        i = 0; // Reinicializar i
+        i = 0;
         token = strtok(line, " ");
 
         while (token != NULL && i < 99)
@@ -61,5 +61,5 @@ int main(void)
     }
 
     free(line);
-    return (0); /* Times that I corrected this code: 15 */
+    return (0); /* Times that I corrected this code: 16 */
 }
