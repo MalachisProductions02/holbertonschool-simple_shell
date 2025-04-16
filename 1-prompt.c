@@ -28,7 +28,7 @@ int main(void)
 		}
 
 		if (line[read - 1] == '\n')
-			line[read - 1] == '\0';
+			line[read - 1] = '\0';
 
 		while (token != NULL && i < 99)
 		{
