@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <errno.h>
 
 /**
  * int prototype
@@ -16,8 +17,13 @@
  */
 extern char **environ;
 
+/**
+ * last_status - stores the exit status of the last executed command.
+ */
+extern int last_status;
+
 void shell_loop(void);
-void execute_command(char *command);
+int execute_command(char *command);
 char *get_full_path(char *command);
 
 #endif /* SHELL_H */
