@@ -7,6 +7,11 @@
 #include <string.h>
 #include <sys/wait.h>
 
+/**
+ * int prototype
+ * void prototype
+ * char prototype
+ */
 extern char **environ;
 
 void shell_loop(void);
