@@ -10,7 +10,11 @@ void execute_command(char *command)
 
 	if (pid == 0)
 	{
-		char *argv[] = {command, NULL};
+		char *argv[2];
+
+		argv[0] = command;
+
+		argv[1] = NULL;
 
 		if (execve(command, argv, environ) == -1)
 		{
