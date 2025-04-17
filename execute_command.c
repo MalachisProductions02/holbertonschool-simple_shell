@@ -64,4 +64,5 @@ int execute_command(char *line)
 		perror("fork");
         return (1);
 	}
+    return (1);
 }
