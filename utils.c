@@ -28,7 +28,7 @@ char *get_full_path(char *command)
 		if (access(full_path, X_OK) == 0)
 		{
 			free(path_copy);
-			return full_path; /* El caller debe liberar */
+			return (full_path);
 		}
 		free(full_path);
 		token = strtok(NULL, ":");

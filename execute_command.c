@@ -1,7 +1,5 @@
 #include "shell.h"
 
-extern char **environ;
-
 char *get_full_path(char *command);
 
 /**
@@ -46,6 +44,7 @@ void execute_command(char *command)
 	else if (pid > 0)
 	{
 		int status;
+
 		waitpid(pid, &status, 0);
 	}
 	else
