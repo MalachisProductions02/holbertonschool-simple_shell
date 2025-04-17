@@ -6,6 +6,7 @@ char *get_full_path(char *command);
  * execute_command - executes a command (with or without PATH)
  * @line: the input string containing the command and its arguments,
  * separated by spaces (e.g., "ls -l /home").
+ * Return: the exit status of the executed command, or 1 if an error occurs.
  */
 int execute_command(char *line)
 {
