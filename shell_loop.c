@@ -4,39 +4,41 @@
  * trim_whitespace - Removes leading and trailing whitespace from a string
  * @str: The input string to be trimmed
  *
- * Return: Pointer to the trimmed string
+ * Return: Pointer to the trimmed string (within original buffer)
  */
 char *trim_whitespace(char *str)
 {
 	char *end;
 
-	/* Move the pointer forward while there are leading spaces */
+	/* Skip leading whitespace */
 	while (*str == ' ')
 		str++;
 
-	/* If the string is empty after trimming spaces */
+	/* Return if empty */
 	if (*str == '\0')
 		return (str);
 
-	/* Find the end of the string */
+	/* Move to the end */
 	end = str + strlen(str) - 1;
 
-	/* Move the end pointer backward */
+	/* Trim trailing whitespace and newlines */
 	while (end > str && (*end == ' ' || *end == '\n'))
 		end--;
 
-	/* Null-terminate the string after the last non-space character */
+	/* Terminate after last non-whitespace character */
 	*(end + 1) = '\0';
 
 	return (str);
 }
 
 /**
- * shell_loop - main loop of the shell
+ * shell_loop - Main loop of the simple shell
+ * Displays prompt, reads input, and executes command
  */
 void shell_loop(void)
 {
 	char *line = NULL;
+	char *trimmed = NULL;
 	size_t len = 0;
 	ssize_t read;
 
@@ -48,17 +50,19 @@ void shell_loop(void)
 		read = getline(&line, &len, stdin);
 		if (read == -1)
 		{
-			free(line);
 			if (isatty(STDIN_FILENO))
 				write(STDOUT_FILENO, "\n", 1);
 			break;
 		}
 
-		/* Remove newline */
-line = trim_whitespace(line);
+		if (line[read - 1] == '\n')
+			line[read - 1] = '\0';
 
-		if (line[0] != '\0') /* no empty input */
-			execute_command(line);
+		trimmed = trim_whitespace(line);
+
+		if (trimmed[0] != '\0')
+			execute_command(trimmed);
 	}
 
+	free(line);
 }
