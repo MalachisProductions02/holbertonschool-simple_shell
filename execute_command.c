@@ -48,7 +48,7 @@ int execute_command(char *line)
 			perror(cmd_to_exec);
 			if (cmd_to_exec != argv[0])
 				free(cmd_to_exec);
-            /* we use to access errors */
+/* we use to access errors */
 			exit(errno == ENOENT ? 127 : 2);
 		}
 	}
@@ -57,12 +57,12 @@ int execute_command(char *line)
 		int status;
 
 		waitpid(pid, &status, 0);
-        return WEXITSTATUS(status);
+        return (WEXITSTATUS(status));
 	}
 	else
 	{
 		perror("fork");
-        return (1);
+return (1);
 	}
-    return (1);
+return (1);
 }
