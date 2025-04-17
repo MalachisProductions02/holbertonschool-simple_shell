@@ -1,42 +1,39 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
 
-extern char **environ;
-
 /**
- * main - Simple shell
- * Return: 0 on success, 1 on error
+ * main - Simple Shell replica
+ * Return: Always 0.
  */
 int main(void)
 {
     char *line = NULL;
-    char *args[100];
     size_t len = 0;
     ssize_t read;
-    pid_t pid;
-    int i;
+    char *args[100];
     char *token;
+    pid_t pid;
+    int status;
 
     while (1)
     {
-        write(1, "#cisfun$ ", 9);
+        if (isatty(STDIN_FILENO))
+            write(STDOUT_FILENO, "#cisfun$ ", 9);
 
         read = getline(&line, &len, stdin);
         if (read == -1)
         {
             free(line);
-            exit(0);
+            break;
         }
 
         if (line[read - 1] == '\n')
             line[read - 1] = '\0';
 
-        i = 0;
+        int i = 0;
         token = strtok(line, " ");
         while (token != NULL && i < 99)
         {
@@ -52,19 +49,21 @@ int main(void)
         if (pid == 0)
         {
             if (execve(args[0], args, environ) == -1)
+            {
                 perror("./shell");
-            exit(1);
+                exit(EXIT_FAILURE);
+            }
         }
         else if (pid > 0)
         {
-            wait(NULL);
+            wait(&status);
         }
         else
         {
-            perror("Error:");
+            perror("fork");
         }
     }
 
     free(line);
-    return (0); /* Times that I corrected this code: 19...damn bro, I need a rest UnU */
+    return 0;/* Times that I corrected this f*cking code: 20 plis bro I can't feel my ass anymore.. */
 }
