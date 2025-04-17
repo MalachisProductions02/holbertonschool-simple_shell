@@ -39,7 +39,9 @@ int execute_command(char *line)
 			cmd_to_exec = get_full_path(argv[0]);
 			if (!cmd_to_exec)
 			{
-				fprintf(stderr, "%s: command not found\n", argv[0]);
+				fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+				if (cmd_to_exec != argv[0])
+					free(cmd_to_exec);
 				exit(127);
 			}
 		}
