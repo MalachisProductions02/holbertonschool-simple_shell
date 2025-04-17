@@ -40,15 +40,13 @@ int execute_command(char *line)
 			if (!cmd_to_exec)
 			{
 				fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
-				if (cmd_to_exec != argv[0])
-					free(cmd_to_exec);
 				exit(127);
 			}
 		}
 
 		if (execve(cmd_to_exec, argv, environ) == -1)
 		{
-			perror(cmd_to_exec);
+			fprintf(stdderr, "./hsh: 1: %s: not found\n", argv[0]);
 			if (cmd_to_exec != argv[0])
 				free(cmd_to_exec);
 /* we use to access errors */
