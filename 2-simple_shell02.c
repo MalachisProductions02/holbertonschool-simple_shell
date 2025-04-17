@@ -1,4 +1,5 @@
 #include "main.h"
+#include "shell.h"
 
 void simple_shell(void)
 {
