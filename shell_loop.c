@@ -55,7 +55,7 @@ void shell_loop(void)
 		}
 
 		/* Remove newline */
-        line = trim_whitespace(line);
+line = trim_whitespace(line);
 
 		if (line[0] != '\0') /* no empty input */
 			execute_command(line);
