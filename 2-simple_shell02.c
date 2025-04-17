@@ -55,7 +55,7 @@ int main(void)
 		}
 
 		pid = fork();
-		if (pid = 0)
+		if (pid == 0)
 		{
 			if (execve(args[0], args, environ) == -1)
 			{
