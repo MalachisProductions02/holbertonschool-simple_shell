@@ -51,5 +51,6 @@ void simple_shell(void)
         else
             perror("fork");
     }
-    free(line);
+    if (line)
+        free(line);
 }
