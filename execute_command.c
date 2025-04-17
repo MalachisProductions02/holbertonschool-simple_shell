@@ -50,7 +50,7 @@ int execute_command(char *line)
 			if (cmd_to_exec != argv[0])
 				free(cmd_to_exec);
 /* we use to access errors */
-			exit(errno == ENOENT ? 127 : 2);
+			exit(127);
 		}
 	}
 	else if (pid > 0)
