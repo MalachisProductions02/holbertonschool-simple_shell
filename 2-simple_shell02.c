@@ -10,7 +10,7 @@ extern char **environ;
 
 /**
  * main - Simple shell 0.1+ : executes commands with arguments
- * Return: Always 0, succes
+ * Return: Always 0, success
  */
 int main(void)
 {
@@ -30,7 +30,7 @@ int main(void)
 			break;
 
 		if (line[read - 1] == '\n')
-			line[read  - 1] = '\0';
+			line[read - 1] = '\0';
 
 		i = 0;
 		token = strtok(line, " ");
