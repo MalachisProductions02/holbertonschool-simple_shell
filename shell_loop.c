@@ -21,7 +21,7 @@ char *trim_whitespace(char *str)
 	/* Find the end of the string */
 	end = str + strlen(str) - 1;
 
-	/* Move the end pointer backward while there are trailing spaces or newlines */
+	/* Move the end pointer backward */
 	while (end > str && (*end == ' ' || *end == '\n'))
 		end--;
 
@@ -56,8 +56,6 @@ void shell_loop(void)
 
 		/* Remove newline */
         line = trim_whitespace(line);
-		/*if (line[read - 1] == '\n')
-			line[read - 1] = '\0';*/
 
 		if (line[0] != '\0') /* no empty input */
 			execute_command(line);
