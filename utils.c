@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/**
+ * get_full_path - Retrieves the full path of a command by
+ * searching in the PATH
+ * @command: The command to search for
+ *
+ * Return: Pointer to the full path if found, NULL otherwise.
+ */
 char *get_full_path(char *command)
 {
 	char *path = getenv("PATH");
