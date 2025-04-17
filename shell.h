@@ -16,5 +16,6 @@ extern char **environ;
 
 void shell_loop(void);
 void execute_command(char *command);
+char *get_full_path(char *command);
 
 #endif /* SHELL_H */
