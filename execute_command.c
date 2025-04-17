@@ -46,11 +46,11 @@ int execute_command(char *line)
 
 		if (execve(cmd_to_exec, argv, environ) == -1)
 		{
-			fprintf(stdderr, "./hsh: 1: %s: not found\n", argv[0]);
+			fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
 			if (cmd_to_exec != argv[0])
 				free(cmd_to_exec);
 /* we use to access errors */
-			exit(errno == ENOENT ? 127 : 2);
+			exit(127);
 		}
 	}
 	else if (pid > 0)
