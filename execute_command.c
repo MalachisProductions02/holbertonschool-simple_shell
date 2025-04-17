@@ -21,6 +21,7 @@ void execute_command(char *command)
 	else if (pid > 0)
 	{
 		int status;
+        
 		waitpid(pid, &status, 0);
 	}
 	else
