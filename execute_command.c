@@ -20,7 +20,6 @@ void execute_command(char *command)
 
 		if (strchr(command, '/') != NULL)
 		{
-			/* Ruta absoluta o relativa, como /bin/ls o ./hbtn_ls */
 			cmd_to_exec = command;
 		}
 		else
@@ -35,7 +34,8 @@ void execute_command(char *command)
 
 		if (execve(cmd_to_exec, argv, environ) == -1)
 		{
-			perror("./shell");
+            /* this helps to use others paths */
+			perror(cmd_to_exec);
 			if (cmd_to_exec != command)
 				free(cmd_to_exec);
 			exit(EXIT_FAILURE);
