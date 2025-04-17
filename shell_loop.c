@@ -1,12 +1,9 @@
-#include "main.h"
-
-void execute_command(char *line);
+#include "shell.h"
 
 /**
- * main - Entry point of simple shell
- * Return: Always 0
+ * shell_loop - main loop of the shell
  */
-int main(void)
+void shell_loop(void)
 {
 	char *line = NULL;
 	size_t len = 0;
@@ -21,16 +18,18 @@ int main(void)
 		if (read == -1)
 		{
 			free(line);
+			if (isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "\n", 1);
 			break;
 		}
 
+		/* Remove newline */
 		if (line[read - 1] == '\n')
 			line[read - 1] = '\0';
 
-		if (line[0] != '\0')
+		if (line[0] != '\0') /* no empty input */
 			execute_command(line);
 	}
 
 	free(line);
-	return (0);
 }

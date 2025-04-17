@@ -19,7 +19,6 @@
 extern char **environ;
 
 void simple_shell(void);
-void execute_command(char *line);
 
 int _putchar(char);
 int add_numbers(int a, int b);
