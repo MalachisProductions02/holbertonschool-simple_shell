@@ -4,6 +4,8 @@
 #include <sys/wait.h>
 #include <string.h>
 
+extern char **environ;
+
 /**
  * main - Simple Shell replica
  * Return: Always 0.
@@ -20,6 +22,8 @@ int main(void)
 
     while (1)
     {
+        int i;
+
         if (isatty(STDIN_FILENO))
             write(STDOUT_FILENO, "#cisfun$ ", 9);
 
@@ -30,10 +34,12 @@ int main(void)
             break;
         }
 
+        /* Remover salto de línea */
         if (line[read - 1] == '\n')
             line[read - 1] = '\0';
 
-        int i = 0;
+        /* Tokenizar entrada */
+        i = 0;
         token = strtok(line, " ");
         while (token != NULL && i < 99)
         {
@@ -65,5 +71,5 @@ int main(void)
     }
 
     free(line);
-    return 0;/* Times that I corrected this f*cking code: 20 plis bro I can't feel my ass anymore.. */
+    return 0; /* Times that I corrected this code: 21...damn... */
 }
