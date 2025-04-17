@@ -37,6 +37,12 @@ void simple_shell(void)
             continue;
         }
 
+	if (access(args[0], X_OK) != 0 && get_full_path(args[0]) == NULL)
+	{
+		fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
+		continue;
+	}
+
         pid = fork();
         if (pid == 0)
         {
