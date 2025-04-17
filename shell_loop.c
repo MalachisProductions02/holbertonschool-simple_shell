@@ -31,5 +31,4 @@ void shell_loop(void)
 			execute_command(line);
 	}
 
-	free(line);
 }
