@@ -4,7 +4,8 @@ char *get_full_path(char *command);
 
 /**
  * execute_command - executes a command (with or without PATH)
- * @command: the command to run (e.g. ls, /bin/ls, ./hbtn_ls)
+ * @line: the input string containing the command and its arguments,
+ * separated by spaces (e.g., "ls -l /home").
  */
 void execute_command(char *line)
 {
@@ -53,6 +54,7 @@ void execute_command(char *line)
 	else if (pid > 0)
 	{
 		int status;
+
 		waitpid(pid, &status, 0);
 	}
 	else
