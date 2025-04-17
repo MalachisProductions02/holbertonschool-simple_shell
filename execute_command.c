@@ -7,7 +7,7 @@ char *get_full_path(char *command);
  * @line: the input string containing the command and its arguments,
  * separated by spaces (e.g., "ls -l /home").
  */
-void execute_command(char *line)
+int execute_command(char *line)
 {
 	pid_t pid;
 	char *token, *cmd_to_exec;
