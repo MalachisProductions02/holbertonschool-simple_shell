@@ -1,3 +1,5 @@
+#include "shell.h"
+
 char *get_full_path(char *command)
 {
 	char *path = getenv("PATH");
