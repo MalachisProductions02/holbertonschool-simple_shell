@@ -60,6 +60,12 @@ void shell_loop(void)
 
 		trimmed = trim_whitespace(line);
 
+        /* implement exit command */
+        if (strcmp(trimmed, "exit") == 0)
+        {
+            break;
+        }
+
 		if (trimmed[0] != '\0')
 			execute_command(trimmed);
 	}
