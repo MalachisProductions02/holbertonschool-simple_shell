@@ -24,7 +24,7 @@ void execute_command(char *line)
 	argv[i] = NULL;
 
 	if (argv[0] == NULL)
-		return;
+		return (0);
 
 	pid = fork();
 	if (pid == 0)
@@ -39,7 +39,7 @@ void execute_command(char *line)
 			if (!cmd_to_exec)
 			{
 				fprintf(stderr, "%s: command not found\n", argv[0]);
-				exit(EXIT_FAILURE);
+				exit(127);
 			}
 		}
 
@@ -49,7 +49,7 @@ void execute_command(char *line)
 			if (cmd_to_exec != argv[0])
 				free(cmd_to_exec);
             /* we use to access errors */
-			exit(errno == ENOENT ? EXIT_FAILURE : 2);
+			exit(errno == ENOENT ? 127 : 2);
 		}
 	}
 	else if (pid > 0)
@@ -57,9 +57,11 @@ void execute_command(char *line)
 		int status;
 
 		waitpid(pid, &status, 0);
+        return WEXITSTATUS(status);
 	}
 	else
 	{
 		perror("fork");
+        return (1);
 	}
 }

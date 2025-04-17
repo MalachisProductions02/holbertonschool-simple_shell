@@ -10,22 +10,17 @@ char *trim_whitespace(char *str)
 {
 	char *end;
 
-	/* Skip leading whitespace */
 	while (*str == ' ')
 		str++;
 
-	/* Return if empty */
 	if (*str == '\0')
 		return (str);
 
-	/* Move to the end */
 	end = str + strlen(str) - 1;
 
-	/* Trim trailing whitespace and newlines */
 	while (end > str && (*end == ' ' || *end == '\n'))
 		end--;
 
-	/* Terminate after last non-whitespace character */
 	*(end + 1) = '\0';
 
 	return (str);
@@ -60,17 +55,16 @@ void shell_loop(void)
 
 		trimmed = trim_whitespace(line);
 
-        /* implement exit command */
-        if (strcmp(trimmed, "exit") == 0)
-        {
-            free(line);
+		if (strcmp(trimmed, "exit") == 0)
+		{
+			free(line);
 			exit(last_status);
-        }
+		}
 
 		if (trimmed[0] != '\0')
 			last_status = execute_command(trimmed);
 	}
 
 	free(line);
-    exit(last_status);
+	exit(last_status);
 }
