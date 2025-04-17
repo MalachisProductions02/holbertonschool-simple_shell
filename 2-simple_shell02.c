@@ -3,6 +3,7 @@
 void simple_shell(void)
 {
     char *line = NULL, *token, *args[MAX_ARGS];
+    char *full_path = NULL;
     size_t len = 0;
     ssize_t read;
     pid_t pid;
@@ -37,7 +38,6 @@ void simple_shell(void)
             continue;
         }
 	
-	char *full_path = NULL;
 	if (access(args[0], X_OK) == 0)
 	{
 		full_path = args[0];
