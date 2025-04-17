@@ -61,16 +61,14 @@ void shell_loop(void)
 			exit(last_status);
 		}
 
-        if (strcmp(trimmed, "env") == 0)
-        {
-            handle_env();
-            continue;
-        }        
-
+if (strcmp(trimmed, "env") == 0)
+{
+handle_env();
+continue;
+}
 		if (trimmed[0] != '\0')
 			last_status = execute_command(trimmed);
 	}
-
 	free(line);
 	exit(last_status);
 }
