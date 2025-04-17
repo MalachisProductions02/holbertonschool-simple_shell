@@ -25,5 +25,6 @@ extern int last_status;
 void shell_loop(void);
 int execute_command(char *command);
 char *get_full_path(char *command);
+void handle_env(void);
 
 #endif /* SHELL_H */
