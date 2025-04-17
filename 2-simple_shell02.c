@@ -37,6 +37,21 @@ void simple_shell(void)
             continue;
         }
 	
+	char *full_path = NULL;
+	if (access(args[0], X_OK) == 0)
+	{
+		full_path = args[0];
+	}
+	else
+	{
+		full_path = get_full_path(args[0]);
+		if (!full_path)
+		{
+			fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
+			continue;
+		}
+	}
+
         pid = fork();
         if (pid == 0)
         {
@@ -52,6 +67,6 @@ void simple_shell(void)
             perror("fork");
     }
 
-    if (line)
-        free(line);
+    if (full_path != args[0])
+        free(full_path);
 }
