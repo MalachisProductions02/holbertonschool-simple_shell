@@ -1,6 +1,37 @@
 #include "shell.h"
 
 /**
+ * trim_whitespace - Removes leading and trailing whitespace from a string
+ * @str: The input string to be trimmed
+ *
+ * Return: Pointer to the trimmed string
+ */
+char *trim_whitespace(char *str)
+{
+	char *end;
+
+	/* Move the pointer forward while there are leading spaces */
+	while (*str == ' ')
+		str++;
+
+	/* If the string is empty after trimming spaces */
+	if (*str == '\0')
+		return (str);
+
+	/* Find the end of the string */
+	end = str + strlen(str) - 1;
+
+	/* Move the end pointer backward while there are trailing spaces or newlines */
+	while (end > str && (*end == ' ' || *end == '\n'))
+		end--;
+
+	/* Null-terminate the string after the last non-space character */
+	*(end + 1) = '\0';
+
+	return (str);
+}
+
+/**
  * shell_loop - main loop of the shell
  */
 void shell_loop(void)
@@ -24,8 +55,9 @@ void shell_loop(void)
 		}
 
 		/* Remove newline */
-		if (line[read - 1] == '\n')
-			line[read - 1] = '\0';
+        line = trim_whitespace(line);
+		/*if (line[read - 1] == '\n')
+			line[read - 1] = '\0';*/
 
 		if (line[0] != '\0') /* no empty input */
 			execute_command(line);
