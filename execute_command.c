@@ -48,7 +48,8 @@ void execute_command(char *line)
 			perror(cmd_to_exec);
 			if (cmd_to_exec != argv[0])
 				free(cmd_to_exec);
-			exit(EXIT_FAILURE);
+            /* we use to access errors */
+			exit(errno == ENOENT ? EXIT_FAILURE : 2);
 		}
 	}
 	else if (pid > 0)

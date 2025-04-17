@@ -63,12 +63,14 @@ void shell_loop(void)
         /* implement exit command */
         if (strcmp(trimmed, "exit") == 0)
         {
-            break;
+            free(line);
+			exit(last_status);
         }
 
 		if (trimmed[0] != '\0')
-			execute_command(trimmed);
+			last_status = execute_command(trimmed);
 	}
 
 	free(line);
+    exit(last_status);
 }
