@@ -16,7 +16,7 @@ char *trim_whitespace(char *str)
 	if (*str == '\0')
 		return (str);
 
-	end = str + strlen(str) - 1;
+	end = str + _strlen(str) - 1;
 
 	while (end > str && (*end == ' ' || *end == '\n'))
 		end--;
@@ -55,7 +55,7 @@ void shell_loop(void)
 
 		trimmed = trim_whitespace(line);
 
-		if (strcmp(trimmed, "exit") == 0)
+		if (_strcmp(trimmed, "exit") == 0)
 		{
 			free(line);
 			exit(last_status);
