@@ -30,4 +30,6 @@ void handle_env(void);
 int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
 
+ssize_t custom_getline(char **lineptr, size_t *n, int fd);
+
 #endif /* SHELL_H */
