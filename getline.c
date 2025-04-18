@@ -33,7 +33,7 @@ ssize_t custom_getline(char **lineptr, size_t *n, int fd)
             *n *= 2;
             new_line = malloc(*n);
             if (!new_line) return -1;
-            for (i = 0; i < len; i++) {
+            for (i = 0; i < (size_t)len; i++) {
                 new_line[i] = (*lineptr)[i];
             }
             free(*lineptr);
