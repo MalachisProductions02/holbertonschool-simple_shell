@@ -34,11 +34,10 @@ void shell_loop(void)
 {
 	char *line = NULL;
 	char *trimmed = NULL;
-	char **args;
+	char **args = NULL;
 	size_t len = 0;
 	ssize_t read;
 	int status = 0;
-	int i = 0;
 
 	while (1)
 	{
@@ -57,38 +56,48 @@ void shell_loop(void)
 			line[read - 1] = '\0';
 
 		trimmed = trim_whitespace(line);
-
-		if (_strcmp(trimmed, "exit") == 0)
-		{
-			free(line);
-			exit(last_status);
-		}
-
-		if (_strcmp(trimmed, "env") == 0)
-		{
-			handle_env();
+		if (trimmed[0] == '\0')
 			continue;
-		}
-		if (trimmed[0] != '\0')
-			last_status = execute_command(trimmed);
 
-		if (_strcmp(args[0], "exit") == 0)
+		args = split_line(trimmed);
+
+		if (args && args[0] != NULL)
 		{
-			if (args[1][i] != NULL)
+			if (_strcmp(args[0], "exit") == 0)
 			{
-				while (args[1][i] != '\0')
+				if (args[1] != NULL)
 				{
-					if (args[1][i] < '0' || args[1][i] > '9')
+					int i = 0, valid = 1;
+
+					while (args[1][i])
 					{
-						write(2, "exit: numeric argument required\n", 32);
-						return;
+						if (args[1][i] < '0' || args[1][i] > '9')
+						{
+							write(2, "exit: numeric argument required\n", 32);
+							valid = 0;
+							break;
+						}
+						i++;
 					}
-					i++;
+					if (valid)
+						status = _atoi(args[1]);
+					else
+						status = 2;
 				}
-				status = _atoi(args[1]);
+				free(args);
+				free(line);
+				exit(status);
 			}
-			exit(status);
+			else if (_strcmp(args[0], "env") == 0)
+			{
+				handle_env();
+			}
+			else
+			{
+				last_status = execute_command(trimmed);
+			}
 		}
+		free(args);
 	}
 	free(line);
 	exit(last_status);
