@@ -35,5 +35,7 @@ ssize_t custom_getline(char **lineptr, size_t *n, int fd);
 
 char *_strtok(char *str, const char *delim);
 char *_strchr(const char *s, char c);
+char *_strcpy(char *dest, const char *src);
+char **split_line(char *line);
 
 #endif /* SHELL_H */
