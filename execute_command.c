@@ -30,7 +30,7 @@ int execute_command(char *line)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (strchr(argv[0], '/') != NULL)
+		if (_strchr(argv[0], '/') != NULL)
 		{
 			cmd_to_exec = argv[0];
 		}
