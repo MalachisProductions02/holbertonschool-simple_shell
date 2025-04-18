@@ -16,14 +16,14 @@ char *_strtok(char *str, const char *delim)
 	if (backup == NULL)
 		return NULL;
 
-	while (*backup && strchr(delim, *backup))
+	while (*backup && _strchr(delim, *backup))
 		backup++;
 
 	if (*backup == '\0') return NULL;
 
 	token = backup;
 
-	while (*backup && !strchr(delim, *backup))
+	while (*backup && !_strchr(delim, *backup))
 		backup++;
 
 	if (*backup) {
