@@ -9,7 +9,7 @@ ssize_t custom_getline(char **lineptr, size_t *n, int fd)
 	static size_t buf_pos, buf_size;
 	char *new_line;
 	char c;
-	size_t len = 0;
+	ssize_t len = 0;
 
 	if (!lineptr || !n) return -1;
 	if (*lineptr == NULL || *n == 0) {
