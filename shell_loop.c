@@ -61,7 +61,7 @@ void shell_loop(void)
 			exit(last_status);
 		}
 
-if (strcmp(trimmed, "env") == 0)
+if (_strcmp(trimmed, "env") == 0)
 {
 handle_env();
 continue;
