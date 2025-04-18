@@ -42,7 +42,7 @@ void shell_loop(void)
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "#cisfun$ ", 9);
 
-		read = getline(&line, &len, stdin);
+		read = custom_getline(&line, &len, stdin);
 		if (read == -1)
 		{
 			if (isatty(STDIN_FILENO))
