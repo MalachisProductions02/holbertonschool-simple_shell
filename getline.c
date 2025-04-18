@@ -28,7 +28,7 @@ ssize_t custom_getline(char **lineptr, size_t *n, int fd)
 		c = buffer[buf_pos++];
 		(*lineptr)[len++] = c;
 
-		if (len >= *n) {
+		if ((size_t)len >= *n) {
 			*n *= 2;
 			new_line = realloc(*lineptr, *n);
 			if (!new_line) return -1;
