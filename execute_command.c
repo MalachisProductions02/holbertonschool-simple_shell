@@ -16,11 +16,11 @@ int execute_command(char *line)
 	int i = 0;
 
 	/* Tokenize input into argv */
-	token = strtok(line, " ");
+	token = _strtok(line, " ");
 	while (token && i < MAX_ARGS - 1)
 	{
 		argv[i++] = token;
-		token = strtok(NULL, " ");
+		token = _strtok(NULL, " ");
 	}
 	argv[i] = NULL;
 
