@@ -20,7 +20,7 @@ char *get_full_path(char *command)
 	if (!path_copy)
 		return (NULL);
 
-	token = strtok(path_copy, ":");
+	token = _strtok(path_copy, ":");
 	while (token)
 	{
 		len = snprintf(NULL, 0, "%s/%s", token, command) + 1;
@@ -38,7 +38,7 @@ char *get_full_path(char *command)
 			return (full_path);
 		}
 		free(full_path);
-		token = strtok(NULL, ":");
+		token = _strtok(NULL, ":");
 	}
 	free(path_copy);
 	return (NULL);
