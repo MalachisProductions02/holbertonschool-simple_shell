@@ -34,6 +34,7 @@ void shell_loop(void)
 {
 	char *line = NULL;
 	char *trimmed = NULL;
+	char **args;
 	size_t len = 0;
 	ssize_t read;
 	int status = 0;
@@ -80,7 +81,7 @@ void shell_loop(void)
 					if (args[1][i] < '0' || args[1][i] > '9')
 					{
 						write(2, "exit: numeric argument required\n", 32);
-						return (1);
+						return;
 					}
 					i++;
 				}
