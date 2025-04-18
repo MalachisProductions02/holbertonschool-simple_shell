@@ -27,4 +27,6 @@ int execute_command(char *command);
 char *get_full_path(char *command);
 void handle_env(void);
 
+int _strcmp(char *s1, char *s2);
+
 #endif /* SHELL_H */
