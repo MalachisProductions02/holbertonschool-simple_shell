@@ -8,6 +8,7 @@ int last_status = 0;
  */
 int main(void)
 {
+	signal(SIGINT, sigint_handler);
 	shell_loop();
 	return (0);
 }
