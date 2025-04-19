@@ -33,6 +33,7 @@ int _strlen(const char *s);
 int _atoi(char *s);
 int _setenv(const char *name, const char *value, int overwrite);
 int _unsetenv(const char *name);
+int builtin_cd(char **args);
 
 ssize_t custom_getline(char **lineptr, size_t *n, int fd);
 
