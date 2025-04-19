@@ -10,7 +10,7 @@
 char **split_line(char *line)
 {
 	int bufsize = 64, position = 0;
-	int length = end - start;
+	int length;
 	char **tokens = malloc(sizeof(char *) * bufsize);
 	char *start = line, *end;
 
@@ -32,6 +32,8 @@ char **split_line(char *line)
 
 		while (*end != '\0' && *end != ' ' && *end != '\t')
 			end++;
+
+		length = end - start;
 
 		tokens[position] = malloc(length + 1);
 		if (!tokens[position])
