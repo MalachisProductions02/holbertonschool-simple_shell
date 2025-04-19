@@ -31,7 +31,7 @@ char **split_line(char *line)
 		while (*end != '\0' && *end != ' ' && *end != '\t')
 			end++;
 
-		int lenght = end - start;
+		int length = end - start;
 		tokens[position] = malloc(length + 1);
 		if (!tokens[position])
 		{
