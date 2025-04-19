@@ -61,7 +61,7 @@ void shell_loop(void)
 
 		args = split_line(trimmed);
 
-		if (args && args[0] != '\0')
+		if (args && args[0] && args[0][0] != '\0')
 		{
 			if (_strcmp(args[0], "exit") == 0)
 			{
