@@ -134,7 +134,7 @@ void shell_loop(void)
                     write(2, "Usage: unsetenv VARIABLE\n", 25);
                 }
             }
-            else if (_strcmp(args[0], "cd") == 0)  /* NUEVA PARTE */
+            else if (_strcmp(args[0], "cd") == 0)
             {
                 if (builtin_cd(args) != 0)
                     status = 2;
