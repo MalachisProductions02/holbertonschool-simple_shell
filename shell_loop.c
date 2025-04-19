@@ -75,17 +75,28 @@ void shell_loop(void)
                     {
                         if (args[1][i] < '0' || args[1][i] > '9')
                         {
-                            write(2, "exit: numeric argument required\n", 32);
+                            if (args[1][i] == '-' && i == 0 && args[1][i+1] != '\0') 
+                            {
+                                write(2, "./hsh: 1: exit: Illegal number: ", 32);
+                                write(2, args[1], _strlen(args[1]));
+                                write(2, "\n", 1);
+                            }
+                            else
+                            {
+                                write(2, "exit: numeric argument required\n", 32);
+                            }
                             valid = 0;
                             break;
                         }
                         i++;
                     }
+
                     if (valid)
                         status = _atoi(args[1]);
                     else
                         status = 2;
                 }
+
                 if (args != NULL)
                 {
                     for (i = 0; args[i] != NULL; i++)
