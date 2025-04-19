@@ -39,11 +39,11 @@ int builtin_cd(char **args)
             return (-1);
     }
 
-    setenv("OLDPWD", oldpwd, 1);
+    _setenv("OLDPWD", oldpwd, 1);
 
     if (getcwd(cwd, sizeof(cwd)) != NULL)
     {
-        setenv("PWD", cwd, 1);
+        _setenv("PWD", cwd, 1);
     }
 
     return (0);
