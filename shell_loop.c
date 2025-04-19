@@ -75,7 +75,7 @@ void shell_loop(void)
                     {
                         if (args[1][i] < '0' || args[1][i] > '9')
                         {
-                            if (args[1][i] == '-' && i == 0 && args[1][i+1] != '\0') 
+                            if (args[1][i] == '-' && i == 0 && args[1][i + 1] != '\0')
                             {
                                 write(2, "./hsh: 1: exit: Illegal number: ", 32);
                                 write(2, args[1], _strlen(args[1]));
@@ -90,7 +90,6 @@ void shell_loop(void)
                         }
                         i++;
                     }
-
                     if (valid)
                         status = _atoi(args[1]);
                     else
@@ -134,6 +133,11 @@ void shell_loop(void)
                 {
                     write(2, "Usage: unsetenv VARIABLE\n", 25);
                 }
+            }
+            else if (_strcmp(args[0], "cd") == 0)  /* NUEVA PARTE */
+            {
+                if (builtin_cd(args) != 0)
+                    status = 2;
             }
             else
             {
