@@ -28,6 +28,7 @@ char *get_full_path(char *command);
 void handle_env(void);
 
 int _strcmp(char *s1, char *s2);
+int _strncmp(const char *s1, const char *s2, size_t n);
 int _strlen(const char *s);
 int _atoi(char *s);
 int _setenv(const char *name, const char *value, int overwrite);
