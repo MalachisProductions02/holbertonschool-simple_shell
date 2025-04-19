@@ -12,7 +12,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 	if (!name || !value)
 		return (-1);
 
-	if (overwrite == 0 && gatenv(name) != NULL)
+	if (overwrite == 0 && getenv(name) != NULL)
 		return (0);
 
 	if (setenv(name, value, 1) != 0)
