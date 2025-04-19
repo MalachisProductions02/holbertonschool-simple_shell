@@ -24,9 +24,20 @@ int _setenv(const char *name, const char *value, int overwrite)
         if (_strncmp(environ[i], name, name_len) == 0 && environ[i][name_len] == '=')
         {
             if (!overwrite)
-                return (0);
-            break;
-        }
+            return (0);
+
+            new_var = malloc(name_len + value_len + 2);
+            if (!new_var)
+            return (-1);
+
+            _strcpy(new_var, name);
+            new_var[name_len] = '=';
+            _strcpy(new_var + name_len + 1, value);
+            new_var[name_len + value_len + 1] = '\0';
+
+            environ[i] = new_var;
+            return (0);
+        }    
         i++;
     }
 
