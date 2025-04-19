@@ -1,7 +1,7 @@
 #include "shell.h"
 #include <unistd.h>
 #include <stdio.h>
-#include <limits.h>  /* <- Esto es lo que faltaba */
+#include <limits.h>
 
 /**
  * builtin_cd - Changes the current directory of the process
@@ -10,19 +10,18 @@
  */
 int builtin_cd(char **args)
 {
-    char *dir, *home, *oldpwd, cwd[1024], *prev_pwd;
+    char *dir = args[1], *home, *oldpwd, *prev_pwd, cwd[1024];
 
-    dir = args[1];
     prev_pwd = _getenv("PWD");
 
-    if (dir == NULL)  /* cd sin argumento */
+    if (dir == NULL)
     {
         home = _getenv("HOME");
         if (home == NULL)
             return (-1);
         dir = home;
     }
-    else if (_strcmp(dir, "-") == 0)  /* cd - */
+    else if (_strcmp(dir, "-") == 0)
     {
         oldpwd = _getenv("OLDPWD");
         if (oldpwd == NULL)
