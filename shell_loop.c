@@ -1,4 +1,5 @@
 #include "shell.h"
+#include <limits.h>
 
 /**
  * builtin_cd - Changes the current directory of the process
