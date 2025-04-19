@@ -28,7 +28,7 @@ char *get_full_path(char *command);
 void handle_env(void);
 
 int _strcmp(char *s1, char *s2);
-int _strlen(char *s);
+int _strlen(const char *s);
 int _atoi(char *s);
 int _setenv(const char *name, const char *value, int overwrite);
 int _unsetenv(const char *name);
