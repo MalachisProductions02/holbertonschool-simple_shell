@@ -1,26 +1,21 @@
 #include "shell.h"
 
 /**
- * _strncpy - Copia hasta n caracteres de la cadena src a dest.
- * @dest: El buffer de destino.
- * @src: La cadena fuente.
- * @n: Número máximo de caracteres a copiar.
+ * _strcpy - Copies a string from source to destination
+ * @dest: The destination buffer where the string will be copied
+ * @src: The source string to copy
  *
- * Return: El puntero a dest.
+ * Return: Pointer to the destination buffer
  */
-char *_strncpy(char *dest, const char *src, int n)
+char *_strcpy(char *dest, const char *src)
 {
-    int i;
+    int i = 0;
 
-    for (i = 0; i < n && src[i] != '\0'; i++)
+    while (src[i] != '\0')
     {
         dest[i] = src[i];
+        i++;
     }
-
-    for (; i < n; i++)
-    {
-        dest[i] = '\0';
-    }
-
-    return (dest);
+    dest[i] = '\0';
+    return dest;
 }
