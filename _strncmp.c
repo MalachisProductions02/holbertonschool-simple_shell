@@ -1,4 +1,5 @@
 #include "shell.h"
+#include <string.h>
 
 /**
  * _strncmp - Compare two strings up to n characters
