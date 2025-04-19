@@ -10,39 +10,34 @@
  */
 int builtin_cd(char **args)
 {
-    char *dir, *home, *oldpwd, cwd[PATH_MAX];
+    char *dir = args[1], *home, *oldpwd, cwd[1024];
 
-    oldpwd = _getcwd(cwd, sizeof(cwd));
-
-    if (args[1] == NULL)
+    if (dir == NULL)  /* cd without argument */
     {
         home = _getenv("HOME");
-        if (!home)
+        if (home == NULL)
             return (-1);
-        if (chdir(home) != 0)
-            return (-1);
+        dir = home;
     }
-    else if (_strcmp(args[1], "-") == 0)
+    else if (_strcmp(dir, "-") == 0)  /* cd - */
     {
-        char *old = _getenv("OLDPWD");
-        if (!old)
+        oldpwd = _getenv("OLDPWD");
+        if (oldpwd == NULL)
             return (-1);
-        if (chdir(old) != 0)
-            return (-1);
-        write(STDOUT_FILENO, old, _strlen(old));
+        dir = oldpwd;
+        write(STDOUT_FILENO, dir, _strlen(dir));
         write(STDOUT_FILENO, "\n", 1);
     }
-    else
-    {
-        dir = args[1];
-        if (chdir(dir) != 0)
-            return (-1);
-    }
 
-    _setenv("OLDPWD", oldpwd, 1);
+    if (chdir(dir) != 0)
+    {
+        perror("cd");
+        return (-1);
+    }
 
     if (getcwd(cwd, sizeof(cwd)) != NULL)
     {
+        _setenv("OLDPWD", _getenv("PWD"), 1);
         _setenv("PWD", cwd, 1);
     }
 
