@@ -1,56 +1,49 @@
 #include "shell.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <limits.h>  /* <- Esto es lo que faltaba */
 
 /**
- * builtin_cd - Changes the current working directory.
- * @args: Arguments passed to "cd" (args[0] = "cd", args[1] = path or NULL).
- *
- * Return: 0 on success, -1 on error.
+ * builtin_cd - Changes the current directory of the process
+ * @args: argument vector, args[0] is "cd", args[1] is the target directory
+ * Return: 0 on success, -1 on failure
  */
 int builtin_cd(char **args)
 {
-    char *path, *home, *oldpwd;
-    char cwd[1024];
+    char *dir, *home, *oldpwd, cwd[PATH_MAX];
 
-    home = _getenv("HOME");
-    oldpwd = _getenv("OLDPWD");
+    oldpwd = getcwd(cwd, sizeof(cwd));
 
-    if (!args[1] || _strcmp(args[1], "~") == 0)
+    if (args[1] == NULL)
     {
+        home = _getenv("HOME");
         if (!home)
             return (-1);
-        path = home;
+        if (chdir(home) != 0)
+            return (-1);
     }
     else if (_strcmp(args[1], "-") == 0)
     {
-        if (!oldpwd)
-        {
-            write(STDERR_FILENO, "OLDPWD not set\n", 15);
+        char *old = _getenv("OLDPWD");
+        if (!old)
             return (-1);
-        }
-        path = oldpwd;
-        write(STDOUT_FILENO, path, _strlen(path));
+        if (chdir(old) != 0)
+            return (-1);
+        write(STDOUT_FILENO, old, _strlen(old));
         write(STDOUT_FILENO, "\n", 1);
     }
     else
     {
-        path = args[1];
+        dir = args[1];
+        if (chdir(dir) != 0)
+            return (-1);
     }
 
-    if (chdir(path) != 0)
-    {
-        perror("cd");
-        return (-1);
-    }
+    setenv("OLDPWD", oldpwd, 1);
 
     if (getcwd(cwd, sizeof(cwd)) != NULL)
     {
-        _setenv("OLDPWD", _getenv("PWD"), 1);
-        _setenv("PWD", cwd, 1);
-    }
-    else
-    {
-        perror("getcwd");
-        return (-1);
+        setenv("PWD", cwd, 1);
     }
 
     return (0);
