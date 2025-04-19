@@ -1,15 +1,6 @@
 #include "shell.h"
 
 /**
- * _setenv - Sets or updates and environment variable
- * @name: Name of the variable
- * @value: Value of the variable
- * @overwrite: 1 to overwrite existing value, 0 to keep
- * Return: 0 on succes, -1 on failure
- */
-#include "shell.h"
-
-/**
  * _setenv - set or update an environment variable
  * @name: name of the variable
  * @value: value to set
@@ -20,10 +11,13 @@
 int _setenv(const char *name, const char *value, int overwrite)
 {
     char *new_var;
-    int i = 0, name_len = _strlen(name), value_len = _strlen(value);
+    int i = 0, name_len, value_len;
 
     if (!name || !value || name[0] == '\0' || _strchr(name, '=') != NULL)
         return (-1);
+
+    name_len = _strlen(name);
+    value_len = _strlen(value);
 
     while (environ[i])
     {
@@ -31,7 +25,6 @@ int _setenv(const char *name, const char *value, int overwrite)
         {
             if (!overwrite)
                 return (0);
-            free(environ[i]);
             break;
         }
         i++;
@@ -50,6 +43,7 @@ int _setenv(const char *name, const char *value, int overwrite)
     environ[i + 1] = NULL;
     return (0);
 }
+
 /**
  * _unsetenv - Removes an environment variable
  * @name: Name of the variable to remove
