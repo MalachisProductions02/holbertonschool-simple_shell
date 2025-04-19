@@ -10,16 +10,19 @@
  */
 int builtin_cd(char **args)
 {
-    char *dir = args[1], *home, *oldpwd, cwd[1024];
+    char *dir, *home, *oldpwd, cwd[1024], *prev_pwd;
 
-    if (dir == NULL)
+    dir = args[1];
+    prev_pwd = _getenv("PWD");
+
+    if (dir == NULL)  /* cd sin argumento */
     {
         home = _getenv("HOME");
         if (home == NULL)
             return (-1);
         dir = home;
     }
-    else if (_strcmp(dir, "-") == 0)
+    else if (_strcmp(dir, "-") == 0)  /* cd - */
     {
         oldpwd = _getenv("OLDPWD");
         if (oldpwd == NULL)
@@ -28,8 +31,6 @@ int builtin_cd(char **args)
         write(STDOUT_FILENO, dir, _strlen(dir));
         write(STDOUT_FILENO, "\n", 1);
     }
-
-   char *prev_pwd = _getenv("PWD");
 
     if (chdir(dir) != 0)
     {
@@ -43,7 +44,6 @@ int builtin_cd(char **args)
             _setenv("OLDPWD", prev_pwd, 1);
         _setenv("PWD", cwd, 1);
     }
-
 
     return (0);
 }
