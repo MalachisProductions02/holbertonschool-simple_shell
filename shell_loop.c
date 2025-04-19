@@ -119,7 +119,11 @@ void shell_loop(void)
                 last_status = execute_command(trimmed);
                 if (last_status != 0)
                 {
-                    status = 2;
+                    status = last_status;
+                }
+                else
+                {
+                    status = 0;
                 }
             }
         }
@@ -132,5 +136,5 @@ void shell_loop(void)
         }
     }
     free(line);
-    exit(last_status);
+    exit(status);
 }
