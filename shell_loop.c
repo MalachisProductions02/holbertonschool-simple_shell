@@ -84,7 +84,6 @@ void shell_loop(void)
                     else
                         status = 2;
                 }
-                // Free individual tokens and then the args array
                 if (args != NULL)
                 {
                     for (int i = 0; args[i] != NULL; i++)
