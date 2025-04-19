@@ -38,6 +38,7 @@ void shell_loop(void)
     size_t len = 0;
     ssize_t read;
     int status = 0;
+    int i;
 
     while (1)
     {
@@ -67,8 +68,9 @@ void shell_loop(void)
             {
                 if (args[1] != NULL)
                 {
-                    int i = 0, valid = 1;
+                    int valid = 1;
 
+                    i = 0;
                     while (args[1][i])
                     {
                         if (args[1][i] < '0' || args[1][i] > '9')
@@ -86,7 +88,7 @@ void shell_loop(void)
                 }
                 if (args != NULL)
                 {
-                    for (int i = 0; args[i] != NULL; i++)
+                    for (i = 0; args[i] != NULL; i++)
                         free(args[i]);
                     free(args);
                 }
@@ -105,7 +107,7 @@ void shell_loop(void)
 
         if (args != NULL)
         {
-            for (int i = 0; args[i] != NULL; i++)
+            for (i = 0; args[i] != NULL; i++)
                 free(args[i]);
             free(args);
         }
