@@ -41,6 +41,6 @@ char *_strncpy(char *dest, const char *src, int n);
 char **split_line(char *line);
 char *_strcpy(char *dest, const char *src);
 
-void sigint_handler(void sig);
+void sigint_handler(int sig);
 
 #endif /* SHELL_H */
