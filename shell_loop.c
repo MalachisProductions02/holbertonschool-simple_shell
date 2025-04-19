@@ -101,12 +101,9 @@ void shell_loop(void)
                     status = 0;
                 }
 
-                if (args != NULL)
-                {
-                    for (i = 0; args[i] != NULL; i++)
-                        free(args[i]);
-                    free(args);
-                }
+                for (i = 0; args[i] != NULL; i++)
+                    free(args[i]);
+                free(args);
                 free(line);
                 exit(status);
             }
@@ -114,17 +111,34 @@ void shell_loop(void)
             {
                 handle_env();
             }
-            else
+            else if (_strcmp(args[0], "setenv") == 0)
             {
-                last_status = execute_command(trimmed);
-                if (last_status != 0)
+                if (args[1] && args[2])
                 {
-                    status = last_status;
+                    if (_setenv(args[1], args[2], 1) != 0)
+                        write(2, "Failed to set environment variable\n", 35);
                 }
                 else
                 {
-                    status = 0;
+                    write(2, "Usage: setenv VARIABLE VALUE\n", 29);
                 }
+            }
+            else if (_strcmp(args[0], "unsetenv") == 0)
+            {
+                if (args[1])
+                {
+                    if (_unsetenv(args[1]) != 0)
+                        write(2, "Failed to unset environment variable\n", 37);
+                }
+                else
+                {
+                    write(2, "Usage: unsetenv VARIABLE\n", 25);
+                }
+            }
+            else
+            {
+                last_status = execute_command(trimmed);
+                status = (last_status != 0) ? last_status : 0;
             }
         }
 
