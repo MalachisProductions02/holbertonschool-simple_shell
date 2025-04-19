@@ -12,7 +12,7 @@ int builtin_cd(char **args)
 {
     char *dir, *home, *oldpwd, cwd[PATH_MAX];
 
-    oldpwd = getcwd(cwd, sizeof(cwd));
+    oldpwd = _getcwd(cwd, sizeof(cwd));
 
     if (args[1] == NULL)
     {
