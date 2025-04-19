@@ -40,6 +40,7 @@ char *_strchr(const char *s, char c);
 char *_strncpy(char *dest, const char *src, int n);
 char **split_line(char *line);
 char *_strcpy(char *dest, const char *src);
+char *_getenv(const char *name);
 
 void sigint_handler(int sig);
 
