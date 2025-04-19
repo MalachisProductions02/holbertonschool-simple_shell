@@ -98,7 +98,7 @@ void shell_loop(void)
                 }
                 else
                 {
-                    status = 2;
+                    status = 0;
                 }
 
                 if (args != NULL)
@@ -117,7 +117,6 @@ void shell_loop(void)
             else
             {
                 last_status = execute_command(trimmed);
-
                 if (last_status != 0)
                 {
                     status = 2;
