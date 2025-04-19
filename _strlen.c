@@ -6,14 +6,12 @@
  *
  * Return: The length of the string
  */
-int _strlen(char *s)
+int _strlen(const char *s)
 {
-	int lenght = 0;
+    int len = 0;
 
-	while (s[lenght] != '\0')
-	{
-		lenght++;
-	}
+    while (s[len] != '\0')
+        len++;
 
-	return lenght;
+    return len;
 }
