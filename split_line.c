@@ -10,6 +10,7 @@
 char **split_line(char *line)
 {
 	int bufsize = 64, position = 0;
+	int length = end - start;
 	char **tokens = malloc(sizeof(char *) * bufsize);
 	char *start = line, *end;
 
@@ -21,7 +22,6 @@ char **split_line(char *line)
 
 	while (*start != '\0')
 	{
-		/* Skip leading spaces and tabs */
 		while (*start == ' ' || *start == '\t')
 			start++;
 
@@ -30,12 +30,8 @@ char **split_line(char *line)
 
 		end = start;
 
-		/* Find the end of the current token */
 		while (*end != '\0' && *end != ' ' && *end != '\t')
 			end++;
-
-		/* Calculate the length of the token */
-		int length = end - start;
 
 		tokens[position] = malloc(length + 1);
 		if (!tokens[position])
@@ -44,9 +40,8 @@ char **split_line(char *line)
 			exit(EXIT_FAILURE);
 		}
 
-		/* Copy the token into the new memory space */
 		_strncpy(tokens[position], start, length);
-		tokens[position][length] = '\0';  /* Null-terminate the token */
+		tokens[position][length] = '\0';
 		position++;
 
 		start = end;
