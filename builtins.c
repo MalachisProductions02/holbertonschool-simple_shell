@@ -63,9 +63,10 @@ int _unsetenv(const char *name)
         {
             free(environ[i]);
             for (j = i; environ[j]; j++)
-                environ[j] = environ[j + 1];
+            environ[j] = environ[j + 1];
             return (0);
         }
+
         i++;
     }
     return (0);
