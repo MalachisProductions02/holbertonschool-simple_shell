@@ -96,6 +96,10 @@ void shell_loop(void)
                     else
                         status = 2;
                 }
+                else
+                {
+                    status = 2;
+                }
 
                 if (args != NULL)
                 {
