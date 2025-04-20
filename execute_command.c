@@ -15,6 +15,7 @@ int execute_command(char *line)
     char *argv[MAX_ARGS];
     int i = 0;
 
+    /* Tokenize input into argv */
     token = _strtok(line, " ");
     while (token && i < MAX_ARGS - 1)
     {
@@ -31,42 +32,42 @@ int execute_command(char *line)
     {
         if (_strchr(argv[0], '/') != NULL)
         {
-            cmd_to_exec = argv[0];
+            cmd_to_exec = argv[0];  /* Command contains full path */
         }
         else
         {
-            cmd_to_exec = get_full_path(argv[0]);
-            if (!cmd_to_exec)
+            cmd_to_exec = get_full_path(argv[0]);  /* Look for command in PATH */
+            if (!cmd_to_exec)  /* Command not found */
             {
                 fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
-                exit(127);
+                exit(127);  /* Exit with status 127 for command not found */
             }
         }
 
-        if (execve(cmd_to_exec, argv, environ) == -1)
+        if (execve(cmd_to_exec, argv, environ) == -1)  /* Execute the command */
         {
             fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
             if (cmd_to_exec != argv[0])
                 free(cmd_to_exec);
-            exit(127);
+            exit(127);  /* Exit with status 127 if execve fails */
         }
     }
     else if (pid > 0)
     {
         int status;
 
-        waitpid(pid, &status, 0);
+        waitpid(pid, &status, 0);  /* Wait for child process to finish */
         if (WEXITSTATUS(status) == 0)
         {
-            write(STDOUT_FILENO, "OK\n", 3);
+            write(STDOUT_FILENO, "OK\n", 3);  /* Output "OK" if the command executed successfully */
         }
-        return (WEXITSTATUS(status));
+        return (WEXITSTATUS(status));  /* Return exit status of child process */
     }
     else
     {
-        perror("fork");
-        return (1);
+        perror("fork");  /* Error creating the child process */
+        return (1);  /* Return 1 in case of error */
     }
 
-    return (1);
+    return (1);  /* This line should never be reached */
 }
