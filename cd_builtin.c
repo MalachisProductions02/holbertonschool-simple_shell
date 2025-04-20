@@ -15,7 +15,7 @@ int builtin_cd(char **args)
     char *oldpwd;
     char *prev_pwd;
     char cwd[1024];
-
+    
     dir = args[1];
     prev_pwd = _getenv("PWD");
 
@@ -32,8 +32,6 @@ int builtin_cd(char **args)
         if (oldpwd == NULL)
             return (-1);
         dir = oldpwd;
-        write(STDOUT_FILENO, dir, _strlen(dir));
-        write(STDOUT_FILENO, "\n", 1);
     }
 
     if (chdir(dir) != 0)
@@ -47,10 +45,10 @@ int builtin_cd(char **args)
         if (prev_pwd != NULL)
             _setenv("OLDPWD", prev_pwd, 1);
         _setenv("PWD", cwd, 1);
-    }
 
-    write(STDOUT_FILENO, cwd, _strlen(cwd));
-    write(STDOUT_FILENO, "\n", 1);
+        write(STDOUT_FILENO, cwd, _strlen(cwd));
+        write(STDOUT_FILENO, "\n", 1);
+    }
 
     return (0);
 }
