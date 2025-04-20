@@ -57,10 +57,6 @@ int execute_command(char *line)
         int status;
 
         waitpid(pid, &status, 0);  /* Wait for child process to finish */
-        if (WEXITSTATUS(status) == 0)
-        {
-            write(STDOUT_FILENO, "OK\n", 3);  /* Output "OK" if the command executed successfully */
-        }
         return (WEXITSTATUS(status));  /* Return exit status of child process */
     }
     else
