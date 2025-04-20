@@ -43,18 +43,3 @@ char *get_full_path(char *command)
     free(path_copy);
     return (NULL);
 }
-
-/**
- * handle_env - Prints the current environment
- */
-void handle_env(void)
-{
-	int i = 0;
-
-	while (environ[i])
-	{
-		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
-		write(STDOUT_FILENO, "\n", 1);
-		i++;
-	}
-}
