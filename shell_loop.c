@@ -136,7 +136,9 @@ void shell_loop(void)
             }
             else if (_strcmp(args[0], "cd") == 0)
             {
-                if (builtin_cd(args) != 0)
+                if (builtin_cd(args) == 0)
+                    write(STDOUT_FILENO, "OK\n", 3);
+                else
                     status = 2;
             }
             else
