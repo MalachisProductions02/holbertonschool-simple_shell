@@ -10,8 +10,13 @@
  */
 int builtin_cd(char **args)
 {
-    char *dir = args[1], *home, *oldpwd, *prev_pwd, cwd[1024];
+    char *dir;
+    char *home;
+    char *oldpwd;
+    char *prev_pwd;
+    char cwd[1024];
 
+    dir = args[1];
     prev_pwd = _getenv("PWD");
 
     if (dir == NULL)
