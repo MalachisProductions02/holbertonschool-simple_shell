@@ -56,6 +56,10 @@ int execute_command(char *line)
         int status;
 
         waitpid(pid, &status, 0);
+        if (WEXITSTATUS(status) == 0)
+        {
+            write(STDOUT_FILENO, "OK\n", 3);
+        }
         return (WEXITSTATUS(status));
     }
     else
