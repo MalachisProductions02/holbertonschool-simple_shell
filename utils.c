@@ -13,7 +13,7 @@ char *get_full_path(char *command)
     char *path_copy, *token, *full_path;
     int len;
 
-    if (!path || path[0] == '\0')
+    if (!path || path[0] == '\0')  /* Handle empty PATH */
         return (NULL);
 
     path_copy = strdup(path);
@@ -32,7 +32,7 @@ char *get_full_path(char *command)
         }
 
         snprintf(full_path, len, "%s/%s", token, command);
-        if (access(full_path, X_OK) == 0)
+        if (access(full_path, X_OK) == 0)  /* Command found and is executable */
         {
             free(path_copy);
             return (full_path);
@@ -41,7 +41,7 @@ char *get_full_path(char *command)
         token = _strtok(NULL, ":");
     }
     free(path_copy);
-    return (NULL);
+    return (NULL);  /* Command not found in any directories in PATH */
 }
 
 /**
