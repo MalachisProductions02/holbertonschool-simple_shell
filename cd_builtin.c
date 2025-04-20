@@ -18,7 +18,7 @@ int builtin_cd(char **args)
     dir = args[1];
     home = _getenv("HOME");
     oldpwd = _getenv("OLDPWD");
-
+    
     if (dir == NULL)
     {
         if (home == NULL)
