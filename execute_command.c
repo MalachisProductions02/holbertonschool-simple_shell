@@ -10,60 +10,59 @@ char *get_full_path(char *command);
  */
 int execute_command(char *line)
 {
-	pid_t pid;
-	char *token, *cmd_to_exec;
-	char *argv[MAX_ARGS];
-	int i = 0;
+    pid_t pid;
+    char *token, *cmd_to_exec;
+    char *argv[MAX_ARGS];
+    int i = 0;
 
-	/* Tokenize input into argv */
-	token = _strtok(line, " ");
-	while (token && i < MAX_ARGS - 1)
-	{
-		argv[i++] = token;
-		token = _strtok(NULL, " ");
-	}
-	argv[i] = NULL;
+    token = _strtok(line, " ");
+    while (token && i < MAX_ARGS - 1)
+    {
+        argv[i++] = token;
+        token = _strtok(NULL, " ");
+    }
+    argv[i] = NULL;
 
-	if (argv[0] == NULL)
-		return (0);
+    if (argv[0] == NULL)
+        return (0);
 
-	pid = fork();
-	if (pid == 0)
-	{
-		if (_strchr(argv[0], '/') != NULL)
-		{
-			cmd_to_exec = argv[0];
-		}
-		else
-		{
-			cmd_to_exec = get_full_path(argv[0]);
-			if (!cmd_to_exec)
-			{
-				fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
-				exit(127);
-			}
-		}
+    pid = fork();
+    if (pid == 0)
+    {
+        if (_strchr(argv[0], '/') != NULL)
+        {
+            cmd_to_exec = argv[0];
+        }
+        else
+        {
+            cmd_to_exec = get_full_path(argv[0]);
+            if (!cmd_to_exec)
+            {
+                fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+                exit(127);
+            }
+        }
 
-		if (execve(cmd_to_exec, argv, environ) == -1)
-		{
-			fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
-			if (cmd_to_exec != argv[0])
-				free(cmd_to_exec);
-/* we use to access errors */
-			exit(127);
-		}
-	}
-	else if (pid > 0)
-	{
-		int status;
+        if (execve(cmd_to_exec, argv, environ) == -1)
+        {
+            fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+            if (cmd_to_exec != argv[0])
+                free(cmd_to_exec);
+            exit(127);
+        }
+    }
+    else if (pid > 0)
+    {
+        int status;
 
-		waitpid(pid, &status, 0);
-return (WEXITSTATUS(status));
-	}
-	else
-	{
-		perror("fork");
-return (1);
-	}
-return (1);
+        waitpid(pid, &status, 0);
+        return (WEXITSTATUS(status));
+    }
+    else
+    {
+        perror("fork");
+        return (1);
+    }
+
+    return (1);
 }
