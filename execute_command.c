@@ -43,6 +43,8 @@ int execute_command(char *line)
             }
         }
 
+        freopen("/dev/null", "w", stdout);
+
         if (execve(cmd_to_exec, argv, environ) == -1)
         {
             fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
